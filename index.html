@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <script type="text/javascript" src="/static/pixi.min.js"></script>
+  <script type="text/javascript" src="/static/main.js"></script>
+  <link rel="stylesheet" href="/static/font.css">
+  <title>dingjiaozhu website</title>
+  <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+  <style>
+    canvas {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -2;
+      pointer-events: none
+    }
+a:hover,
+a:link,
+a:visited,
+a:active,
+a:focus {
+    text-decoration: none;
+   
+}
+
+button,
+input,
+input:focus {
+    outline: none;
+    border: none;
+
+}
+
+a,
+button,
+input {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+*{
+
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* 其他浏览器 */
+}
+
+    * {
+      box-sizing: border-box;
+      -webkit-text-size-adjust: none
+    }
+
+    img {
+      border: 0;
+      vertical-align: middle
+    }
+
+
+    body {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      display: flex;
+      flex-direction: column; /* 垂直布局 */
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh; /* 允许内容撑开 */
+      width: 100vw;
+      background: radial-gradient(#619bff, #e0e0e3);
+      padding-bottom: 40px; /* 底部留空 */
+    }
+
+    .main {
+      width: 35%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: auto 0; /* 主体居中，footer下沉 */
+    }
+
+    /* 底部备案样式 - 文字与链接大小完全一致 */
+    footer {
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 14px; /* 统一字体大小 */
+      color: rgba(255, 255, 255, 0.8); /* 统一文字颜色 */
+      line-height: 1.5;
+    }
+
+    footer a {
+      font-size: 14px; /* 链接与文字大小一致 */
+      color: rgba(255, 255, 255, 0.8); /* 链接颜色与文字统一 */
+      margin: 0 3px;
+      text-decoration: underline;
+    }
+
+    footer a:hover {
+      color: #fff !important;
+      text-shadow: 0 0 8px #fff;
+    }
+
+    /* 响应式调整 - 保持大小一致 */
+    @media screen and (max-width:768px) {
+      footer, footer a {
+        font-size: 13px; /* 移动端同比例缩小 */
+      }
+    }
+
+    @media screen and (max-width:480px) {
+      footer, footer a {
+        font-size: 12px; /* 小屏继续同比例缩小 */
+      }
+    }
+
+    @media screen and (max-width:1024px) {
+      .main {
+        width: 45%;
+      }
+    }
+
+    @media screen and (max-width:768px) {
+      .main {
+        width: 50%;
+      }
+    }
+
+    @media screen and (max-width:540px) {
+      .main {
+        width: 60% !important;
+        footer {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+        }
+      }
+    }
+
+    @media screen and (max-width:480px) {
+      .main {
+        width: 90% !important;
+      }
+    }
+
+    @media screen and (max-width:360px) {
+      .main {
+        width: 100% !important;
+      }
+    }
+
+
+    img {
+      border: 3px solid rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      box-shadow:0 0px 20px 5px #e6e8ea;
+      transition: .4s ease-in-out;
+    }
+
+    h1 {
+      font-family: 'Noto Serif SC', serif;
+      color: #fff;
+      font-size: 1.8rem;
+      line-height: 2em;
+      font-weight: 800;
+    }
+
+    h2 {
+      margin: 0;
+      color: #ffffffa3;
+      padding-bottom: 45px;
+      font-size: 18px;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      position: relative;
+      list-style-type: none;
+      display: inline-flex;
+      width: 100%;
+      justify-content: space-around;
+      border-bottom: 2px solid hsla(0, 0%, 100%, .1);
+      border-top: 2px solid hsla(0, 0%, 100%, .1);
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 85%
+    }
+
+    li {
+      display: flex;
+      transition: all .2s;
+      width: 100%;
+      border-left: 1px solid hsla(0, 0%, 100%, .1);
+      border-right: 1px solid hsla(0, 0%, 100%, .1);
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    a {
+      font-size: 1.2rem;
+      color: #ffffff;
+      transition: all .2s;
+      cursor: pointer;
+    }
+
+    a:hover {
+      color: #fff !important;
+       text-shadow:0 0px 20px #ffffff;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="main">
+    <img src="img/丁教主Ding.jpg" width="130" height="130" alt="avatar">
+    <h1>丁教主Ding的友人帐</h1>
+    <h2>友情+1 友情+1 友情+1 友情+1 友情+1</h2>
+
+    <ul>
+      <li><a href="https://djz.icu"><span>回主页</span></a></li>
+      <li><a href="https://www.konyu.top"><span>空之御的小站</span></a></li>
+      <li><a href="https://ssf.ink"><span>ssflz的小站</span></a></li>
+      <li><a href="https://admie.wang"><span>Admie的小站</span></a></li>
+    </ul>
+  </div>
+
+  <!-- 备案信息（样式统一，固定在底部） -->
+  <footer>
+    丁教主Ding © 2024 - 2025 | 
+    <a href="https://icp.gov.moe/?keyword=20222234" target="_blank">
+      萌ICP备20222234号
+    </a> 
+  </footer>
+
+</body>
+<script>
+//按键触发 
+document.onkeydown = function(){
+  //禁止 ctrl+u
+  if (event.ctrlKey && window.event.keyCode==85){
+    return false;
+  }
+  //禁止 F12
+  if (window.event && window.event.keyCode == 123) {
+    event.keyCode = 0;
+    event.returnValue = false;
+  }
+}
+
+//网站禁止右键
+document.body.oncontextmenu = function() {
+  self.event.returnValue=false
+};
+
+// 禁用右键菜单、复制、选择
+$(document).bind("contextmenu copy selectstart", function() {
+  return false;
+});
+</script>
+</html>
